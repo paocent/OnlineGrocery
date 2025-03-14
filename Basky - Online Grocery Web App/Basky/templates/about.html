@@ -1,0 +1,93 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Mi Flasky - Kaaching Capital{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-expand-lg">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/robochat/">Online Grocery / Food Market</a>
+    </div>
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Global Styles */
+    body {
+        background-color: #f8f9fa; /* Light background */
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        padding-top: 90px; /* Avoid overlap with fixed navbar */
+    }
+
+    /* Hero Section */
+    .hero-section {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(to right, #1e3c72, #2a5298); /* Elegant gradient */
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-text {
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Image Styling */
+    .image-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .responsive-image {
+        max-width: 90%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="container">
+    <div class="hero-section">
+        <h1 class="fw-bold">Basky (Robot Assistance)  </h1>
+        <p class="hero-text">
+            In the heart of a bustling city, amidst the towering skyscrapers and the ceaseless hum of urban life, a revolution was brewing. A revolution not of industry or technology, but of convenience and choice. It was the dawn of the online grocery era.
+
+			In the midst of this burgeoning landscape, a new player emerged, a pioneer in the realm of online grocery shopping. This was no ordinary grocery store; it was a digital haven, a virtual marketplace where the aisles stretched endlessly, and the shelves overflowed with an abundance of choices.
+
+			The brainchild of a visionary entrepreneur, this online grocery was born from a simple yet profound idea: to bring the convenience of grocery shopping to the fingertips of the masses. No more navigating crowded aisles, no more long queues at the checkout counter, no more forgotten items on the shopping list. With just a few clicks, customers could browse through a vast array of products, from fresh produce to pantry staples, and have them delivered right to their doorstep.
+
+			The online grocery quickly gained popularity, attracting customers with its user-friendly interface, competitive pricing, and lightning-fast delivery. It became a haven for busy professionals, time-strapped parents, and anyone seeking a more convenient and efficient way to shop for groceries.
+
+			As the online grocery grew, so did its reputation for innovation and customer satisfaction. It constantly sought new ways to enhance the shopping experience, introducing features such as personalized recommendations, recipe suggestions, and even virtual tours of the store.
+
+
+            <br><br> The online grocery's success was a testament to its commitment to providing a seamless and enjoyable shopping experience. It had transformed the way people shopped for groceries, making it easier, faster, and more convenient than ever before.
+        </p>
+    </div>
+
+    <!-- Image Section -->
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='images/basky.jpg') }}" alt="Basky" class="responsive-image">
+    </div>
+</div>
+{% endblock %}
