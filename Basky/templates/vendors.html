@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grocery Vendors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='images/landing3.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table {
+            color: #333;
+            background-color: white;
+        }
+        .thead-dark {
+            background-color: #343a40;
+            color: white;
+            cursor: pointer;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.075);
+        }
+        h1 {
+            color: #28a745;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .btn-secondary {
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .sort-btn-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            let sortColumn = null;
+            let sortDirection = 1;
+
+            $(".sort-btn").click(function() {
+                const column = $(this).data("column");
+                const columnIndex = getColumnIndex(column);
+
+                if (sortColumn === columnIndex) {
+                    sortDirection *= -1;
+                } else {
+                    sortColumn = columnIndex;
+                    sortDirection = 1;
+                }
+
+                sortTable(columnIndex, sortDirection);
+            });
+
+            function getColumnIndex(column) {
+                switch (column) {
+                    case "vendor":
+                        return 0;
+                    case "product":
+                        return 1;
+                    case "category":
+                        return 2;
+                    case "qty":
+                        return 3;
+                    case "measurement":
+                        return 4;
+                    default:
+                        return 0; // Default to vendor
+                }
+            }
+
+            function sortTable(columnIndex, direction) {
+                const table = $("table tbody");
+                const rows = table.find("tr").toArray().sort(comparer(columnIndex, direction));
+                table.empty().append(rows);
+            }
+
+            function comparer(columnIndex, direction) {
+                return function(a, b) {
+                    const valA = $(a).find("td").eq(columnIndex).text().toUpperCase();
+                    const valB = $(b).find("td").eq(columnIndex).text().toUpperCase();
+                    if (valA < valB) {
+                        return -1 * direction;
+                    }
+                    if (valA > valB) {
+                        return 1 * direction;
+                    }
+                    return 0;
+                };
+            }
+        });
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function getRandomMeasurement() {
+            const measurements = ["Box", "Pieces", "Pounds", "Gallons", "Units"];
+            return measurements[getRandomInt(measurements.length)];
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Our Grocery Vendors</h1>
+       
+        {% if vendors %}
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Vendor Name</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>QTY</th>
+                        <th>Measurement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vendor, products in vendors.items() %}
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ vendor }}</td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.category }}</td>
+                            <td><script>document.write(getRandomInt(500));</script></td>
+                            <td><script>document.write(getRandomMeasurement());</script></td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No vendors found.</p>
+        {% endif %}
+
+        <a class="btn btn-secondary" href="/">Return to Home</a>
+
+    </div>
+</body>
+</html>
