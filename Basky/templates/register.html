@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Register a new Shopper{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-expand-lg fixed-top">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/robochat/">Basky - Online Grocery / Food Market</a>
+    </div>
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Customers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Sellers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Tools</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/robochat/">Basky Chat</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/vendors/">Vendors</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: url("{{ url_for('static', filename='images/landing3.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .content-container {
+        margin-top: 70px; /* Reduced margin-top */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Align items to the top */
+        min-height: calc(100vh - 70px); /* Adjusted min-height */
+        padding-top: 2rem; /* Added padding to give some space */
+    }
+
+    .register-form-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Align items to the top */
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    .register-form {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 3rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 50%;
+        text-align: left;
+    }
+
+    .register-form h1 {
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        font-size: 3rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .image-container {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .responsive-image {
+        max-width: 90%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .register-link {
+        margin-top: 2rem;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .wtf-form-group label {
+        font-size: 1.2rem;
+    }
+
+    .wtf-form-group input, .wtf-form-group select {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        font-size: 1.3rem;
+        padding: 0.8rem 1.5rem;
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="content-container">
+    <div class="register-form-container">
+        <div class="register-form">
+            <h1>Register with us!</h1>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_field(form.email) }}
+                {{ wtf.form_field(form.username) }}
+                {{ wtf.form_field(form.password) }}
+                {{ wtf.form_field(form.password2) }}
+                {{ form.submit(class="btn btn-primary") }}
+                <button type="reset" class="btn btn-secondary">Clear</button>
+            </form>
+            <p class="register-link">
+                Already Registered?
+                <a href="{{ url_for('login') }}">Click here to login</a>
+            </p>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/register3.jpg') }}" alt="Baskie" class="responsive-image">
+        </div>
+    </div>
+</div>
+{% endblock %}

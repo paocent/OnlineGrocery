@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with Robochat</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Ask RoboChat about investing, supported by DeepSeek</h1>
+        <div class="chat-container">
+            <input type="text" id="queryInput" placeholder="Type your investing question...">
+            <button onclick="askQuestion()">Ask me</button>
+            <div id="response" class="response-box"></div>
+        </div>
+    </div>
+
+    <script>
+        async function askQuestion() {
+            const query = document.getElementById('queryInput').value;
+            const responseDiv = document.getElementById('response');
+            
+            responseDiv.innerHTML = "Thinking...";
+            
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query })
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    responseDiv.innerHTML = `Error: ${data.error}`;
+                } else {
+                    responseDiv.innerHTML = data.answer;
+                }
+            } catch (error) {
+                responseDiv.innerHTML = "Failed to get response, oh no!!";
+            }
+        }
+    </script>
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .chat-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .response-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            min-height: 100px;
+        }please update the following template to include an image in the background
+    </style>
+</style>
+</html>

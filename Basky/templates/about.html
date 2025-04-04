@@ -1,0 +1,120 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Mi Flasky - Basky{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-expand-lg fixed-top"> <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/robochat/">Basky - Online Grocery / Food Market</a>
+    </div>
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Customers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Sellers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Tools</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/robochat/">Basky Chat</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/vendors/">Vendors</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Global Styles */
+    body {
+        background: url("{{ url_for('static', filename='images/landing3.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Removed padding-top */
+    }
+
+    .content-container { /* New container for content */
+        margin-top: 90px; /* Add margin to content container */
+    }
+
+    /* Hero Section */
+    .hero-section {
+        display: flex;
+        align-items: center;
+        padding: 5rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        margin: 2rem auto; /* Adjusted margin */
+        max-width: 1200px;
+        width: 98%;
+    }
+
+    .hero-text-container {
+        flex: 1;
+        padding-right: 2rem;
+    }
+
+    .hero-text {
+        font-size: 1.6rem;
+        font-weight: 400;
+        line-height: 1.9;
+        color: #444;
+    }
+
+    .hero-section h1 {
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        font-size: 4rem;
+        font-weight: 700;
+    }
+
+    /* Image Styling */
+    .image-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .responsive-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<div class="container content-container"> <div class="hero-section">
+        <div class="hero-text-container">
+            <h1 class="fw-bold">Basky (Robot Assistance) </h1>
+            <p class="hero-text">
+                In the heart of a bustling city, amidst the towering skyscrapers and the ceaseless hum of urban life, a revolution was brewing. A revolution not of industry or technology, but of convenience and choice. It was the dawn of the online grocery era.
+
+                In the midst of this burgeoning landscape, a new player emerged, a pioneer in the realm of online grocery shopping. This was no ordinary grocery store; it was a digital haven, a virtual marketplace where the aisles stretched endlessly, and the shelves overflowed with an abundance of choices.
+
+                The brainchild of a visionary entrepreneur, this online grocery was born from a simple yet profound idea: to bring the convenience of grocery shopping to the fingertips of the masses. No more navigating crowded aisles, no more long queues at the checkout counter, no more forgotten items on the shopping list. With just a few clicks, customers could browse through a vast array of products, from fresh produce to pantry staples, and have them delivered right to their doorstep.
+
+                The online grocery quickly gained popularity, attracting customers with its user-friendly interface, competitive pricing, and lightning-fast delivery. It became a haven for busy professionals, time-strapped parents, and anyone seeking a more convenient and efficient way to shop for groceries.
+
+                As the online grocery grew, so did its reputation for innovation and customer satisfaction. It constantly sought new ways to enhance the shopping experience, introducing features such as personalized recommendations, recipe suggestions, and even virtual tours of the store.
+
+                <br><br> The online grocery's success was a testament to its commitment to providing a seamless and enjoyable shopping experience. It had transformed the way people shopped for groceries, making it easier, faster, and more convenient than ever before.
+            </p>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/basky.jpg') }}" alt="Basky" class="responsive-image">
+        </div>
+    </div>
+</div>
+{% endblock %}
