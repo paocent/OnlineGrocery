@@ -1,0 +1,96 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}User Profile - Basky{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='images/landing3.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .page-header {
+            background-color: rgba(255, 255, 255, 0.9); /* Even less transparent */
+            padding: 5rem 4rem; /* Significantly increased padding */
+            border-radius: 20px; /* More rounded corners */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+            max-width: 900px; /* Increased max-width */
+            width: 95%; /* Take up even more width */
+            margin: 2rem auto; /* Center with margin */
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem; /* Further increased font size */
+            font-weight: 700; /* Bold font weight */
+            color: #2c3e50;
+            margin-bottom: 2rem; /* Further increased margin */
+        }
+
+        .page-header p {
+            font-size: 1.4rem; /* Further increased font size */
+            color: #444; /* Slightly darker color */
+            margin-bottom: 2.5rem; /* Further increased margin */
+        }
+    </style>
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-expand-lg">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/robochat/">Basky - Online Grocery / Food Market</a>
+    </div>
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Customers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Sellers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Tools</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/robochat/">Basky Chat</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/vendors/">Vendors</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Hello, {{ name }}!</h1>
+        {% if email %}
+        <p>Your email is: {{ email }}</p>
+        {% endif %}
+        {% if role %}
+        <p>Your role is: {{ role }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

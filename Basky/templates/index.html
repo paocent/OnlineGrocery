@@ -1,0 +1,83 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Mi Flasky{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-expand-lg">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/robochat/">Basky - Online Grocery / Food Market</a>
+    </div>
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">View Customers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">View Sellers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ongoing/">Tools</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/robochat/">Basky Chat</a></li>
+                {% if session.get('email') %}
+                <li class="nav-item"><a class="nav-link" href="/vendors/">Vendors</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: url("{{ url_for('static', filename='images/landing3.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .introduction {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .introduction p {
+        font-size: 1.15em;
+        line-height: 1.7;
+        color: #333;
+    }
+
+    .jumbotron {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 4rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="container text-center mt-5">
+    <div class="introduction">
+        <p>
+            Welcome to Basky, your premier online destination for all your grocery needs. We're dedicated to bringing the freshest produce and essential pantry items directly to your doorstep. Basky collaborates with a wide array of local sellers, ensuring you have access to diverse and high-quality products. Whether you're planning a weekly shop or need something last-minute, Basky makes grocery shopping convenient and efficient. Join our community and experience the future of online grocery shopping.
+        </p>
+    </div>
+
+    <div class="jumbotron p-4 bg-light">
+        <h1 class="display-4">Shop with Us, Reliable Robots!</h1>
+        <p class="lead">Create an Account now and start your shopping with us.</p>
+        <a class="btn btn-primary btn-lg" href="/register" role="button">Sign Up</a>
+        <p class="mt-3">Already have an account? <a href="/login">Click here to login</a></p>
+    </div>
+    <p class="text-light">The local date and time is {{ moment(current_time).format('LLL') }}.</p>
+    <p class="text-light">That was {{ moment(current_time).fromNow(refresh=True) }}</p>
+</div>
+{% endblock %}
